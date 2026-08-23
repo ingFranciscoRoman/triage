@@ -2,3 +2,6 @@ node_modules
 dist
 .expo
 pnpm-lock.yaml
+
+# Assets generados por Expo (descriptores de iconos, imágenes)
+apps/mobile/assets
