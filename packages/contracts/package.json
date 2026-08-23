@@ -1,0 +1,22 @@
+{
+  "name": "@triage/contracts",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Esquemas Zod compartidos entre el API y el móvil",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "zod": "^4.0.17"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.2"
+  }
+}
