@@ -5,3 +5,9 @@ pnpm-lock.yaml
 
 # Assets generados por Expo (descriptores de iconos, imágenes)
 apps/mobile/assets
+
+# NativeWind reescribe estos dos en cada corrida de Metro (usa comment-json
+# para editar el tsconfig conservando comentarios). Si Prettier los formatea,
+# el siguiente `expo start` los revierte y el CI se pone rojo solo.
+apps/mobile/nativewind-env.d.ts
+apps/mobile/tsconfig.json

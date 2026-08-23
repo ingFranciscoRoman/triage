@@ -12,6 +12,8 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@triage/contracts": "workspace:*",
+    "zod": "^4.0.17",
     "expo": "~57.0.15",
     "expo-constants": "~57.0.13",
     "expo-linking": "~57.0.7",
