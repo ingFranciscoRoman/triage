@@ -3,7 +3,7 @@
 **Proyecto:** Triage
 **Fase:** F0
 **Duración estimada:** 2 sesiones (~8h)
-**Estado:** Pendiente
+**Estado:** En progreso — sesión 1 de 2 cerrada (backend); falta el móvil
 
 ---
 
@@ -86,6 +86,7 @@ triage/
 │       └── package.json
 ├── .github/workflows/ci.yml
 ├── docs/adr/0001-expo-sobre-rn-cli.md
+├── docs/BITACORA.md
 ├── CLAUDE.md
 ├── pnpm-workspace.yaml
 └── package.json
@@ -139,20 +140,21 @@ el móvil valida con Zod toda respuesta del API antes de usarla. No se confía e
 
 Cada una debería caber en una sentada. Marca al terminar.
 
-- [ ] T1 — Inicializar repo, `pnpm-workspace.yaml`, `.gitignore`, `package.json` raíz con scripts `dev`, `lint`, `typecheck`
-- [ ] T2 — `packages/contracts` con Zod y el schema de health
-- [ ] T3 — `nest new api`, quitar el boilerplate sobrante, crear `HealthModule` que responda según el contrato
-- [ ] T4 — Habilitar CORS en el API para desarrollo local
+- [x] T1 — Inicializar repo, `pnpm-workspace.yaml`, `.gitignore`, `package.json` raíz con scripts `dev`, `lint`, `typecheck`
+- [x] T2 — `packages/contracts` con Zod y el schema de health
+- [x] T3 — ~~`nest new api`~~ scaffold manual del API, crear `HealthModule` que responda según el contrato
+- [x] T4 — Habilitar CORS en el API para desarrollo local
 - [ ] T5 — `create-expo-app` con TypeScript + expo-router, instalar NativeWind
 - [ ] T6 — `lib/api.ts`: fetch + validación Zod + tipos de error
 - [ ] T7 — Pantalla `index.tsx` con los tres estados: cargando / error / datos
 - [ ] T8 — Configurar `EXPO_PUBLIC_API_URL` vía variable de entorno (no hardcodear la IP)
 - [ ] T9 — Probar en teléfono físico
-- [ ] T10 — ESLint + Prettier compartidos en la raíz
-- [ ] T11 — `.github/workflows/ci.yml`
-- [ ] T12 — `CLAUDE.md`
-- [ ] T13 — ADR-0001
+- [x] T10 — ESLint + Prettier compartidos en la raíz
+- [x] T11 — `.github/workflows/ci.yml`
+- [x] T12 — `CLAUDE.md`
+- [x] T13 — ADR-0001
 - [ ] T14 — README con instrucciones de arranque
+- [x] T15 — `docs/BITACORA.md` (lo pide el Definition of Done; faltaba como tarea)
 
 ---
 
@@ -177,6 +179,12 @@ Si el fetch falla y `curl` local sí funciona, es esto.
 **Los workspaces de pnpm con Metro.** El bundler de RN necesita config para
 resolver paquetes del monorepo. Si `@triage/contracts` no resuelve desde el móvil,
 es esto.
+
+> **Trampas encontradas sobre la marcha.** Esta lista se escribió de antemano.
+> Las que aparecieron durante la implementación se documentan en
+> [`docs/BITACORA.md`](../BITACORA.md), con el síntoma y la causa. Al día de hoy:
+> `incremental` de tsc peleándose con `deleteOutDir` de Nest, y CRLF vs LF
+> tumbando el CI. Ambas de entorno Windows + monorepo, no de React Native.
 
 ---
 
