@@ -9,3 +9,9 @@
 
 // Los tipos de NativeWind (el `className` en componentes de RN) NO van aquí:
 // NativeWind genera y mantiene `nativewind-env.d.ts` en cada corrida de Metro.
+//
+// Nota sobre tsconfig.json: no le pongas comentarios. Tanto Expo como
+// NativeWind lo reescriben al arrancar Metro (añaden entradas a `include`) y
+// en el proceso los borran. El alias "@/*" apunta a la raíz del paquete
+// porque seguimos la estructura del spec (app/ y lib/), no el src/ que trae
+// el template de SDK 57.

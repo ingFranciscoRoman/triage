@@ -2,9 +2,6 @@
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
     "strict": true,
-    // El template de SDK 57 pone el código en src/. Aquí seguimos la
-    // estructura del spec (app/ y lib/ en la raíz del paquete), así que el
-    // alias apunta a la raíz.
     "paths": {
       "@/*": [
         "./*"
@@ -16,6 +13,7 @@
     "**/*.tsx",
     ".expo/types/**/*.ts",
     "env.d.ts",
-    "nativewind-env.d.ts"
+    "nativewind-env.d.ts",
+    "expo-env.d.ts"
   ]
 }

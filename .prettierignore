@@ -11,3 +11,7 @@ apps/mobile/assets
 # el siguiente `expo start` los revierte y el CI se pone rojo solo.
 apps/mobile/nativewind-env.d.ts
 apps/mobile/tsconfig.json
+
+# Lo genera `expo start`. Está en el .gitignore del móvil, pero Prettier no
+# lee .gitignore, así que sin esta línea rompe el format:check en local.
+apps/mobile/expo-env.d.ts
