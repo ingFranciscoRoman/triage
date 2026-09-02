@@ -3,7 +3,8 @@
 **Proyecto:** Triage
 **Fase:** F0
 **Duración estimada:** 2 sesiones (~8h)
-**Estado:** En progreso — sesión 1 de 2 cerrada (backend); falta el móvil
+**Estado:** Sesión 2 cerrada — T1–T15 hechas, 8 de 9 criterios verificados.
+Solo queda AC8 (que el CI corra en GitHub), que no depende del código.
 
 ---
 
@@ -144,16 +145,16 @@ Cada una debería caber en una sentada. Marca al terminar.
 - [x] T2 — `packages/contracts` con Zod y el schema de health
 - [x] T3 — ~~`nest new api`~~ scaffold manual del API, crear `HealthModule` que responda según el contrato
 - [x] T4 — Habilitar CORS en el API para desarrollo local
-- [ ] T5 — `create-expo-app` con TypeScript + expo-router, instalar NativeWind
-- [ ] T6 — `lib/api.ts`: fetch + validación Zod + tipos de error
-- [ ] T7 — Pantalla `index.tsx` con los tres estados: cargando / error / datos
-- [ ] T8 — Configurar `EXPO_PUBLIC_API_URL` vía variable de entorno (no hardcodear la IP)
-- [ ] T9 — Probar en teléfono físico
+- [x] T5 — `create-expo-app` con TypeScript + expo-router, instalar NativeWind
+- [x] T6 — `lib/api.ts`: fetch + validación Zod + tipos de error
+- [x] T7 — Pantalla `index.tsx` con los tres estados: cargando / error / datos
+- [x] T8 — Configurar `EXPO_PUBLIC_API_URL` vía variable de entorno (no hardcodear la IP)
+- [x] T9 — Probar en teléfono físico (Android + Expo Go SDK 57)
 - [x] T10 — ESLint + Prettier compartidos en la raíz
 - [x] T11 — `.github/workflows/ci.yml`
 - [x] T12 — `CLAUDE.md`
 - [x] T13 — ADR-0001
-- [ ] T14 — README con instrucciones de arranque
+- [x] T14 — README con instrucciones de arranque
 - [x] T15 — `docs/BITACORA.md` (lo pide el Definition of Done; faltaba como tarea)
 
 ---
@@ -180,21 +181,43 @@ Si el fetch falla y `curl` local sí funciona, es esto.
 resolver paquetes del monorepo. Si `@triage/contracts` no resuelve desde el móvil,
 es esto.
 
+### Añadidas durante F0
+
+Las dos que más tiempo costaron y no estaban previstas:
+
+**La IP LAN cambia sola.** La entrada de arriba dice "pon la IP de tu PC", pero
+omite lo importante: la asigna el router por DHCP y **cambia** —al reiniciar, al
+caducar el préstamo, al cambiar de red—. Pasó a mitad de F0: el `.env` decía
+`192.168.1.3`, el PC pasó a `192.168.80.91`, y la app se colgaba 8s antes de dar
+timeout. El tiempo del fallo es el diagnóstico: instantáneo = hay alguien que
+rechaza (API caído); colgado = no hay nadie en esa dirección (IP mala).
+
+Y si cambias el `.env`, Metro no lo recoge: Babel sustituye
+`EXPO_PUBLIC_API_URL` en tiempo de build. Hay que reiniciar con `--clear`.
+
+**La versión de Expo Go.** Expo Go trae compilado dentro el código nativo de un
+SDK concreto; uno de un SDK anterior no puede correr este proyecto. En iOS lo
+dice con un error claro. **En Android se queda en blanco, sin ningún mensaje**, y
+parece un fallo del propio código. Costó una hora de depuración descartando red,
+bundle, assets y babel antes de llegar ahí.
+
 > **Trampas encontradas sobre la marcha.** Esta lista se escribió de antemano.
 > Las que aparecieron durante la implementación se documentan en
-> [`docs/BITACORA.md`](../BITACORA.md), con el síntoma y la causa. Al día de hoy:
-> `incremental` de tsc peleándose con `deleteOutDir` de Nest, y CRLF vs LF
-> tumbando el CI. Ambas de entorno Windows + monorepo, no de React Native.
+> [`docs/BITACORA.md`](../BITACORA.md), con el síntoma y la causa. De F0:
+> `incremental` de tsc peleándose con `deleteOutDir` de Nest, CRLF vs LF
+> tumbando el CI, la dependencia fantasma de `react-native-css-interop` bajo
+> pnpm, un `.d.ts` gitignorado que habría roto solo el CI, y corepack
+> incapaz de ejecutar pnpm 12.
 
 ---
 
 ## 9. Definition of Done
 
-- [ ] Los 9 criterios de aceptación se cumplen
+- [ ] Los 9 criterios de aceptación se cumplen — 8/9; falta AC8
 - [ ] CI en verde
 - [ ] Mergeado a `main` (sin ramas a medias al cerrar la semana)
-- [ ] ADR escrito
-- [ ] Anotado en `docs/BITACORA.md`: qué costó más de lo esperado y por qué
+- [x] ADR escrito
+- [x] Anotado en `docs/BITACORA.md`: qué costó más de lo esperado y por qué
 
 ---
 
