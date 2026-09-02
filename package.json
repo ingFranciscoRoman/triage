@@ -8,6 +8,8 @@
     "node": ">=22"
   },
   "scripts": {
+    "dev": "pnpm --parallel --filter @triage/contracts --filter api dev",
+    "dev:mobile": "pnpm --filter mobile dev",
     "build": "pnpm -r build",
     "typecheck": "pnpm -r typecheck",
     "lint": "eslint .",
