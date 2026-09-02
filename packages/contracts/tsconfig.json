@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    // CommonJS porque es lo que consume NestJS sin ceremonia.
+    // Metro (React Native) resuelve CJS sin problema, así que sirve para ambos lados.
+    "target": "ES2022",
+    "lib": ["ES2022"],
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+
+    // Emitimos JS + .d.ts a dist/. Los consumidores nunca leen el TS crudo.
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["dist", "node_modules"]
+}

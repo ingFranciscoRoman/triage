@@ -1,0 +1,46 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+# Si empujas dos veces seguidas a la misma rama, cancela la corrida anterior.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    name: build · typecheck · lint
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # Lee la versión de pnpm del campo "packageManager" del package.json raíz,
+      # así no hay dos sitios que puedan desincronizarse.
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Instalar dependencias
+        run: pnpm install --frozen-lockfile
+
+      # build ANTES de typecheck: el API importa @triage/contracts desde su
+      # dist/, así que los .d.ts tienen que existir para que tsc los resuelva.
+      # pnpm -r respeta el orden topológico: contracts primero.
+      - name: Build
+        run: pnpm build
+
+      - name: Typecheck
+        run: pnpm typecheck
+
+      - name: Lint
+        run: pnpm lint
+
+      - name: Formato
+        run: pnpm format:check
