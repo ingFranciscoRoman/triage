@@ -197,6 +197,16 @@ y contamina lo que se escribe después.
 Las tres preguntas del §10 del spec. **Las responde el desarrollador**, no la
 herramienta: el valor está en lo que él note, no en lo que yo deduzca.
 
-- [ ] ¿Qué concepto de React Native se sintió más ajeno viniendo de React web?
-- [ ] ¿Dónde se fue realmente el tiempo?
-- [ ] ¿Qué haría distinto en F1?
+- [x] **¿Qué concepto de React Native se sintió más ajeno viniendo de React web?**
+
+  El maquetado: las etiquetas son distintas. La implementación de hooks es
+  parecida, pero aún me falta práctica. Necesito practicar y aprender los
+  conceptos, que también es importante.
+
+- [x] **¿Dónde se fue realmente el tiempo?**
+
+  En la implementación de la lógica. Me costó mucho. Necesito practicar.
+
+- [x] **¿Qué haría distinto en F1?**
+
+  Necesito recordar para poder aprender.
